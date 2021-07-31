@@ -1,9 +1,8 @@
 package com.example.apiHelpers;
 
-import com.example.apiHelpers.pojo.ListUsersResponse;
+import com.example.apiHelpers.pojo.CreateUserRequest;
+import com.example.apiHelpers.pojo.CreateUserResponse;
 import com.example.apiHelpers.pojo.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,7 +44,6 @@ class ApiHelpersApplicationTests {
 
 	@Test
 	void retrofitTestGetUserNotFound() {
-		Logger log = LogManager.getLogger(ApiHelpersApplicationTests.class);
 		Response<User> response;
 		APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
 		try {
@@ -56,12 +54,42 @@ class ApiHelpersApplicationTests {
 		}
 
 	}
-	@Test
-	void retrofitTestListUsers() {
 
+	@Test
+	void retrofitTestCreateUsers() throws IOException {
+		Response<CreateUserResponse> response;
+		APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
+
+		String expectedName = "morpheus";
+		String expectedJob = "leader";
+
+		CreateUserRequest createUserRequest = CreateUserRequest.builder()
+				.name(expectedName)
+				.job(expectedJob)
+				.build();
+
+		response = service.createUser(createUserRequest).execute();
+
+		Assertions.assertTrue(response.isSuccessful());
+		Assertions.assertEquals(200,response.code());
+		Assertions.assertEquals(expectedName, response.body().getName());
+		Assertions.assertEquals(expectedJob, response.body().getJob());
+
+		System.out.println(response.body());
+	}
+
+	@Test
+	void retrofitTestDeleteUser() throws IOException {
+		response = service.deleteUser().execute();
+		Assertions.assertEquals(204,response.code());
+		System.out.println(response.body());
+
+		}
 
 	}
-}
+
+
+
 
 
 
