@@ -2,18 +2,16 @@ package com.example.apiHelpers;
 
 import com.example.apiHelpers.pojo.User;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 
 public interface APIInterface {
-    @GET("2")
+    @GET("users/2")
     Call<User> getUser();
 
-    @GET("23")
+    @GET("users/23")
     Call<User> getUserNotFound();
 
-
-//    @GET("23")
-//    Call<User> getUserDelayedResponse();
-
-
+    @DELETE("users/2")
+    Call<User> deleteUser();
 }

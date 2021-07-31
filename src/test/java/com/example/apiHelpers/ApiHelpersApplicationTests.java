@@ -49,6 +49,18 @@ class ApiHelpersApplicationTests {
 		}
 	}
 
+	@Test
+	void retrofitTestDeleteUser() {
+		Response<User> response;
+		APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
+		try {
+			response = service.deleteUser().execute();
+			Assertions.assertEquals(204,response.code());
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+
 
 
 }
