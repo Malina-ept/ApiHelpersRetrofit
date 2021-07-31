@@ -1,5 +1,6 @@
 package com.example.apiHelpers;
 
+import com.example.apiHelpers.pojo.ListUsersResponse;
 import com.example.apiHelpers.pojo.User;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -16,6 +17,6 @@ public interface APIInterface {
 //    Call<User> deleteUser();
 
     @GET("users?page=2")
-    Call<User> listUsers();
+    Call <ListUsersResponse> listUsers();
 
 }

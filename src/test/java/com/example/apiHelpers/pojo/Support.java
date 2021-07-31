@@ -1,4 +1,3 @@
-
 package com.example.apiHelpers.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

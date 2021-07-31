@@ -1,5 +1,6 @@
 package com.example.apiHelpers;
 
+import com.example.apiHelpers.pojo.ListUsersResponse;
 import com.example.apiHelpers.pojo.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +19,6 @@ class ApiHelpersApplicationTests {
 
 	@Test
 	void retrofitTestGetUser() {
-
 		Response<User> response;
 
 		//создали клиента для отправки запроса
@@ -40,10 +40,12 @@ class ApiHelpersApplicationTests {
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	void retrofitTestGetUserNotFound() {
+		Logger log = LogManager.getLogger(ApiHelpersApplicationTests.class);
 		Response<User> response;
 		APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
 		try {
@@ -52,31 +54,17 @@ class ApiHelpersApplicationTests {
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+
 	}
 	@Test
-	void retrofitTestListUsers() throws IOException {
-		response = service.listUsers().execute();
-		Assertions.assertEquals(200, response.code());
+	void retrofitTestListUsers() {
+
+
 	}
-
-
-//
-//	@Test
-//	void retrofitTestDeleteUser() {
-//		Response<User> response;
-//		APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
-//		try {
-//			response = service.deleteUser().execute();
-//			Assertions.assertEquals(204,response.code());
-//		} catch (IOException e){
-//			e.printStackTrace();
-//		}
-
-//		void retrofitTestDeleteUser() throws IOException {
-//			response = service.deleteUser().execute();
-//			Assertions.assertEquals(204,response.code());
-//	}
-
-
-
 }
+
+
+
+
+
+
