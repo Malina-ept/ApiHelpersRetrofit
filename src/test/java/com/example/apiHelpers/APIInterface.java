@@ -12,6 +12,10 @@ public interface APIInterface {
     @GET("users/23")
     Call<User> getUserNotFound();
 
-    @DELETE("users/2")
-    Call<User> deleteUser();
+//    @DELETE("users/2")
+//    Call<User> deleteUser();
+
+    @GET("users?page=2")
+    Call<User> listUsers();
+
 }

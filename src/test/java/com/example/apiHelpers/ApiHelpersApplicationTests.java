@@ -1,6 +1,8 @@
 package com.example.apiHelpers;
 
 import com.example.apiHelpers.pojo.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +12,9 @@ import java.io.IOException;
 
 @SpringBootTest
 class ApiHelpersApplicationTests {
+	Response<User> response;
+	//Endpoint service for send request
+	APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
 
 	@Test
 	void retrofitTestGetUser() {
@@ -48,18 +53,29 @@ class ApiHelpersApplicationTests {
 			e.printStackTrace();
 		}
 	}
-
 	@Test
-	void retrofitTestDeleteUser() {
-		Response<User> response;
-		APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
-		try {
-			response = service.deleteUser().execute();
-			Assertions.assertEquals(204,response.code());
-		} catch (IOException e){
-			e.printStackTrace();
-		}
+	void retrofitTestListUsers() throws IOException {
+		response = service.listUsers().execute();
+		Assertions.assertEquals(200, response.code());
 	}
+
+
+//
+//	@Test
+//	void retrofitTestDeleteUser() {
+//		Response<User> response;
+//		APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
+//		try {
+//			response = service.deleteUser().execute();
+//			Assertions.assertEquals(204,response.code());
+//		} catch (IOException e){
+//			e.printStackTrace();
+//		}
+
+//		void retrofitTestDeleteUser() throws IOException {
+//			response = service.deleteUser().execute();
+//			Assertions.assertEquals(204,response.code());
+//	}
 
 
 
